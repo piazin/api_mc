@@ -1,12 +1,8 @@
+import { VideosService } from '../services/videosService';
 import { IResponseExpress } from './types';
-import { NewsService } from '../services/newsService';
 
-class NewsController {
-  private _service: NewsService;
-
-  constructor() {
-    this._service = new NewsService();
-  }
+class VideosController {
+  constructor(private readonly _service = new VideosService()) {}
 
   get: IResponseExpress = async (req, res) => {
     try {
@@ -15,10 +11,11 @@ class NewsController {
       const amount = qtd ? parseInt(qtd) : 10;
       const pageNumber = page ? parseInt(page) : 1;
 
-      let result = await this._service.getAll(pageNumber, amount);
+      const result = await this._service.getAll(pageNumber, amount);
+
       res.status(200).json({ result });
     } catch (error) {
-      res.status(500).json({ error: error.message || error.toString() });
+      res.status(500).json({ error: error.message });
     }
   };
 
@@ -26,13 +23,13 @@ class NewsController {
     try {
       const { id } = req.params;
 
-      let result = await this._service.get(id);
+      const result = await this._service.get(id);
 
       res.status(200).json({ result });
     } catch (error) {
-      res.status(500).json({ error: error.message || error.toString() });
+      res.status(500).json({ error: error.message });
     }
   };
 }
 
-export default new NewsController();
+export default new VideosController();

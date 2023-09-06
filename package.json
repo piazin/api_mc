@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -diagnostics",
-    "start": "node ./dist/src/program.js"
+    "start": "node ./dist/src/program.js",
+    "dev": "tsc && node ./dist/src/program.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "mongoose": "^7.5.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.8.0",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
