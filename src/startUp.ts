@@ -1,17 +1,23 @@
 import 'reflect-metadata';
+import './shared/container';
+import { container } from 'tsyringe';
 import { Database } from './infra/db';
 import express, { Application } from 'express';
-import { NewsController, GaleriaController, VideosController } from './controller';
-import { container } from 'tsyringe';
-import './shared/container';
+import {
+  NewsController,
+  GaleriaController,
+  VideosController,
+  PodcastsController,
+} from './controller';
 
 class StartUp {
   public app: Application;
   public _db: Database = new Database();
   private baseUrl = '/api/v1';
-  private news = container.resolve<typeof NewsController>('INewsService');
-  private videos = container.resolve<typeof VideosController>('IVideosService');
-  private galeria = container.resolve<typeof GaleriaController>('IGaleriaService');
+  private news = container.resolve(NewsController);
+  private videos = container.resolve(VideosController);
+  private galeria = container.resolve(GaleriaController);
+  private podcasts = container.resolve(PodcastsController);
 
   constructor() {
     this.app = express();
@@ -45,6 +51,14 @@ class StartUp {
 
     this.app.route(`${this.baseUrl}/galeria/:page/:qtd`).get((req, res) => {
       return this.galeria.get(req, res);
+    });
+
+    this.app.route(`${this.baseUrl}/podcasts/:id`).get((req, res) => {
+      return this.podcasts.getById(req, res);
+    });
+
+    this.app.route(`${this.baseUrl}/podcasts/:page:qtd`).get((req, res) => {
+      return this.podcasts.get(req, res);
     });
   }
 }

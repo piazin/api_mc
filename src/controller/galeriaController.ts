@@ -1,8 +1,10 @@
-import { GaleriaService } from '../services/galeriaService';
 import { IResponseExpress } from './types';
+import { inject, injectable } from 'tsyringe';
+import { IGaleriaService } from '../contracts/IGaleriaService';
 
+@injectable()
 class GaleriaController {
-  constructor(private readonly _service = new GaleriaService()) {}
+  constructor(@inject('IGaleriaService') private _service: IGaleriaService) {}
 
   get: IResponseExpress = async (req, res) => {
     try {
@@ -32,4 +34,4 @@ class GaleriaController {
   };
 }
 
-export default new GaleriaController();
+export default GaleriaController;
