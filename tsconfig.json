@@ -6,8 +6,7 @@
     "rootDir": ".",
     "esModuleInterop": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "typeRoots": ["../node_modules/@types"]
+    "emitDecoratorMetadata": true
   },
   "include": ["**/*.ts", "*.ts"],
   "exclude": ["node_modules"]
