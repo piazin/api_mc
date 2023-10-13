@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { INewsService } from '../contracts/iNewsService';
 
 @injectable()
-class NewsController {
+export class NewsController {
   constructor(@inject('INewsService') private _service: INewsService) {}
 
   get: IResponseExpress = async (req, res) => {
@@ -32,5 +32,3 @@ class NewsController {
     }
   };
 }
-
-export default NewsController;

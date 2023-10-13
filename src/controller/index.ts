@@ -1,6 +1,4 @@
-import NewsController from './newsController';
-import VideosController from './videosController';
-import GaleriaController from './galeriaController';
-import PodcastsController from './podcastsController';
-
-export { NewsController, VideosController, GaleriaController, PodcastsController };
+export * from './newsController';
+export * from './videosController';
+export * from './galeriaController';
+export * from './podcastsController';
